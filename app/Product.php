@@ -3,11 +3,44 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 
 
+/**
+ * App\Product
+ *
+ * @property int $id
+ * @property string $title
+ * @property string $slug
+ * @property float $price
+ * @property float|null $sale_price
+ * @property string|null $size
+ * @property string|null $description
+ * @property int $quantity
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Category[] $categories
+ * @property-read int|null $categories_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\MediaLibrary\MediaCollections\Models\Media[] $media
+ * @property-read int|null $media_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereSalePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Product extends Model implements HasMedia
 {
     use InteractsWithMedia;
@@ -21,6 +54,11 @@ class Product extends Model implements HasMedia
         'description',
         'quantity',
     ];
+
+    public function categories(): BelongsToMany
+    {
+       return $this->belongsToMany(Category::class, 'category_product', 'product_id', 'category_id');
+    }
 
     public function getFirstImageUrl(): string
     {
