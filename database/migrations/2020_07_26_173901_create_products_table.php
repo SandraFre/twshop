@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
+            $table->string('code')->unique();
             $table->double('price', 20, 8);
             $table->double('sale_price', 20, 8)->nullable();
             $table->string('size')->nullable();

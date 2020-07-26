@@ -29,6 +29,7 @@ class ProductStoreRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255',
+            'code' => 'required|string|max:100',
             'price' => 'required|min:0.01',
             'sale_price'=> 'nullable',
             'size' => 'nullable|string',
@@ -45,6 +46,7 @@ class ProductStoreRequest extends FormRequest
         return [
             'title' => $this->getTitle(),
             'slug' => $this->getSlug(),
+            'code'=> $this->getCode(),
             'price' => $this->getPrice(),
             'sale_price' => $this->getSalePrice(),
             'size' => $this->getSize(),
@@ -72,6 +74,11 @@ class ProductStoreRequest extends FormRequest
         }
 
         return Str::slug($slug);
+    }
+
+    public function getCode(): string
+    {
+        return $this->input('code');
     }
 
     public function getPrice(): float

@@ -42,6 +42,15 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="code">Code</label>
+                                <input class="form-control @error('code') is-invalid @enderror" id="code" type="text"
+                                       name="code" value="{{ old('code') }}">
+                                @error('code')
+                                <em class="alert-danger">{{ $message }}</em>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
                                 <label for="image1">Image</label>
                                 <input class="form-control-file" id="image1" name="image1" value="" type="file" >
                                 @error('image1')
