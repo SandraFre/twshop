@@ -51,9 +51,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="image1">Image</label>
-                                <input class="form-control-file" id="image1" name="image1" value="" type="file" >
-                                @error('image1')
+                                <label for="image">Image</label>
+                                <input class="form-control-file" id="image" name="image" value="" type="file" >
+                                @error('image')
                                 <em class="alert-danger">{{ $message }}</em>
                                 @enderror
                             </div>

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Http\Requests\ProductStoreRequest;
 use App\Product;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -34,13 +36,8 @@ class ProductController extends Controller
         return view('products.form', ['categories' => $categories]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+   
+    public function store(ProductStoreRequest $request): RedirectResponse
     {
         $product = Product::query()->create($request->getData());
 
@@ -51,7 +48,7 @@ class ProductController extends Controller
         $product->categories()->sync($request->getCatIds());
 
         return redirect()->route('products.index')
-            ->with('status', 'Product created!');
+            ->with('status', 'Product created successfully!');
     }
 
 }

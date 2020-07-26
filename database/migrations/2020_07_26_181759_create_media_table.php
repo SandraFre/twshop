@@ -29,8 +29,4 @@ class CreateMediaTable extends Migration
         });
     }
 
-    public function down()
-    {
-        Schema::dropIfExists('media');
-    }
 }

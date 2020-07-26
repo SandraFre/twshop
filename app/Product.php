@@ -2,10 +2,14 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Carbon;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 
 
@@ -15,6 +19,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property int $id
  * @property string $title
  * @property string $slug
+ * @property string $code
  * @property float $price
  * @property float|null $sale_price
  * @property string|null $size
@@ -40,6 +45,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereCode($value)
  */
 class Product extends Model implements HasMedia
 {
@@ -48,6 +54,7 @@ class Product extends Model implements HasMedia
     protected $fillable = [
         'title',
         'slug',
+        'code',
         'price',
         'sale_price',
         'size',
