@@ -33,10 +33,10 @@ Route::namespace('API')->group(function () {
     Route::get('products', 'ProductController@index');
     Route::get('products/{slug}', 'ProductController@show');
 
-    // Route::middleware('auth:api')->group(function () {
-    //     Route::get('order', 'OrderController@index');
-    //     Route::post('order', 'OrderController@store');
-    //     Route::get('order/{order}', 'OrderController@show');
-    // });
+    Route::middleware('auth:api')->group(function () {
+        Route::get('order', 'OrderController@index');
+        Route::post('order', 'OrderController@store');
+        Route::get('order/{order}', 'OrderController@show');
+    });
 });
 
