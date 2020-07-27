@@ -79,20 +79,20 @@ class Product extends Model implements HasMedia
     /**
      * @return array
      */
-    public function getAllImagesUrls(): array
-    {
-        $images = [];
+    // public function getAllImagesUrls(): array
+    // {
+    //     $images = [];
 
-        $imagesCollection = $this->getMedia('product_images');
+    //     $imagesCollection = $this->getMedia('product_images');
 
-        foreach ($imagesCollection as $media) {
-            $images[] = $media->getUrl();
-        }
+    //     foreach ($imagesCollection as $media) {
+    //         $images[] = $media->getUrl();
+    //     }
 
-        if (empty($images)) {
-            $images[] = url('img/no-image.png');
-        }
+    //     if (empty($images)) {
+    //         $images[] = url('img/no-image.png');
+    //     }
 
-        return $images;
-    }
+    //     return $images;
+    // }
 }

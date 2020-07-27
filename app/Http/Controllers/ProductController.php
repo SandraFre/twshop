@@ -36,7 +36,7 @@ class ProductController extends Controller
         return view('products.form', ['categories' => $categories]);
     }
 
-   
+
     public function store(ProductStoreRequest $request): RedirectResponse
     {
         $product = Product::query()->create($request->getData());
@@ -46,7 +46,6 @@ class ProductController extends Controller
         }
 
         $product->categories()->sync($request->getCatIds());
-
         return redirect()->route('products.index')
             ->with('status', 'Product created successfully!');
     }

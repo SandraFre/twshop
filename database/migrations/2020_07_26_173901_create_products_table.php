@@ -18,8 +18,8 @@ class CreateProductsTable extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->string('code')->unique();
-            $table->double('price', 20, 8);
-            $table->double('sale_price', 20, 8)->nullable();
+            $table->double('price', 20, 2);
+            $table->double('sale_price', 20, 2)->nullable();
             $table->string('size')->nullable();
             $table->text('description')->nullable();
             $table->integer('quantity');
