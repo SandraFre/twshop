@@ -22,6 +22,7 @@
                     <table class="table">
                         <tr>
                             <th>#</th>
+                            <th>Image</th>
                             <th>Title</th>
                             <th>Slug</th>
                             <th>Actions</th>
@@ -30,6 +31,9 @@
                         @foreach($list as $item)
                         <tr>
                             <td>{{ $item->id }}</td>
+                            <td>
+                                <img src="{{ $item->getImageUrl() }}" width="70">
+                            </td>
                             <td>{{ $item->title }}</td>
                             <td>{{ $item->slug }}</td>
                             <td>

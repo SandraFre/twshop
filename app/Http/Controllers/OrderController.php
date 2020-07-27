@@ -52,7 +52,7 @@ class OrderController extends Controller
         $order->update($request->getData());
 
         return redirect()->route('orders.index')
-            ->with('status', 'Order updated!');
+            ->with('status', 'Order updated successfully!');
     }
 
 

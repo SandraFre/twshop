@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * App\Category
@@ -25,8 +27,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Category whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class Category extends Model
+class Category extends Model implements HasMedia
 {
+    use InteractsWithMedia;
+
     protected $fillable = [
         'title',
         'slug',
@@ -35,6 +39,15 @@ class Category extends Model
     public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class);
+    }
+
+    public function getImageUrl(): string
+    {
+        if ($image = $this->getMedia('category_images')->first()) {
+            return $image->getUrl();
+        }
+
+        return url('img/no-image.png');
     }
 }
 

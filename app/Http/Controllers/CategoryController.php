@@ -36,7 +36,11 @@ class CategoryController extends Controller
 
     public function store(CategoryStoreRequest $request): RedirectResponse
     {
-        Category::query()->create($request->getData());
+       $category = Category::query()->create($request->getData());
+
+        if ($image = $request->getImage()) {
+            $category->addMedia($image)->toMediaCollection('category_images');
+        }
 
         return redirect()->route('categories.index')
             ->with('status', 'Category created successfully!');
@@ -57,6 +61,10 @@ class CategoryController extends Controller
     public function update(CategoryUpdateRequest $request, Category $category): RedirectResponse
     {
         $category->update($request->getData());
+
+        if ($image = $request->getImage()) {
+            $category->addMedia($image)->toMediaCollection('category_images');
+        }
 
         return redirect()->route('categories.index')
         ->with('status', 'Category updated successfully!');

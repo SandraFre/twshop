@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Category;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 
 
@@ -29,6 +30,7 @@ class CategoryStoreRequest extends FormRequest
     {
         return [
             'title' => 'required|string|min:3|max:255',
+            'image' => 'nullable|image',
         ];
     }
 
@@ -74,5 +76,10 @@ class CategoryStoreRequest extends FormRequest
         return Category::query()
             ->where('slug', '=', $this->getSlug())
             ->exists();
+    }
+
+    public function getImage(): ?UploadedFile
+    {
+        return $this->file('image');
     }
 }

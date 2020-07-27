@@ -45,6 +45,14 @@
                                 @enderror
                             </div>
 
+                            <div class="form-group">
+                                <label for="image">Image</label>
+                                <input class="form-control-file" id="image" name="image" value="" type="file" >
+                                @error('image')
+                                <em class="alert-danger">{{ $message }}</em>
+                                @enderror
+                            </div>
+
                         </div>
 
                         <div class="card-footer">
