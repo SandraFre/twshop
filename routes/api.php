@@ -25,7 +25,7 @@ Route::namespace('API\Auth')->prefix('auth')->group(function () {
 });
 
 Route::namespace('API')->group(function () {
-    // Route::get('search', 'SearchController@search');
+    Route::get('search', 'SearchController@search');
 
     Route::get('categories', 'CategoryController@index');
     Route::get('categories/{slug}', 'CategoryController@products');
