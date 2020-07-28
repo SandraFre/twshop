@@ -70,6 +70,10 @@ class ProductController extends Controller
     {
         $product->update($request->getData());
 
+        if ($image = $request->getImage()) {
+            $product->addMedia($image)->toMediaCollection('product_images');
+        }
+
         $product->categories()->sync($request->getCatIds());
 
         return redirect()->route('products.index')

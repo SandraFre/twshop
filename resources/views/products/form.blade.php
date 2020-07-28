@@ -16,6 +16,9 @@
 
                     <form action="{{ route('products.'. (isset($item->id) ? 'update' : 'store'), isset($item->id) ? ['product' => $item->id] : []) }}" method="post" enctype="multipart/form-data">
                         @csrf
+                        @isset($item->id)
+                            @method('put')
+                        @endisset
                         <div class="card-body">
                             @if (session('status'))
                                 <div class="alert alert-success" role="alert">
