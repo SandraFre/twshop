@@ -14,7 +14,7 @@
                         Product
                     </div>
 
-                    <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('products.'. (isset($item->id) ? 'update' : 'store'), isset($item->id) ? ['product' => $item->id] : []) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             @if (session('status'))
@@ -26,7 +26,7 @@
                             <div class="form-group">
                                 <label for="title">Title</label>
                                 <input class="form-control @error('title') is-invalid @enderror" id="title" type="text"
-                                       name="title" value="{{ old('title') }}">
+                                       name="title" value="{{ old('title', $item->title ?? null) }}">
                                 @error('title')
                                 <em class="alert-danger">{{ $message }}</em>
                                 @enderror
@@ -35,7 +35,7 @@
                             <div class="form-group">
                                 <label for="slug">Slug</label>
                                 <input class="form-control @error('slug') is-invalid @enderror" id="slug" type="text"
-                                       name="slug" value="{{ old('slug') }}">
+                                       name="slug" value="{{ old('slug', $item->slug ?? null) }}">
                                 @error('slug')
                                 <em class="alert-danger">{{ $message }}</em>
                                 @enderror
@@ -44,7 +44,7 @@
                             <div class="form-group">
                                 <label for="code">Code</label>
                                 <input class="form-control @error('code') is-invalid @enderror" id="code" type="text"
-                                       name="code" value="{{ old('code') }}">
+                                       name="code" value="{{ old('code', $item->code ?? null) }}">
                                 @error('code')
                                 <em class="alert-danger">{{ $message }}</em>
                                 @enderror
@@ -61,7 +61,7 @@
                             <div class="form-group">
                                 <label for="price">Price</label>
                                 <input class="form-control @error('price') is-invalid @enderror" id="price" type="text"
-                                       name="price" value="{{ old('price', 0.01) }}" min="0.01">
+                                       name="price" value="{{ old('price', $item->price ?? 0.01) }}" min="0.01">
                                 @error('price')
                                 <em class="alert-danger">{{ $message }}</em>
                                 @enderror
@@ -70,7 +70,7 @@
                             <div class="form-group">
                                 <label for="sale_price">Sale price</label>
                                 <input class="form-control @error('sale_price') is-invalid @enderror" id="sale_price" type="text"
-                                       name="sale_price" value="{{ old('sale_price') }}">
+                                       name="sale_price" value="{{ old('sale_price', $item->sale_price ?? null) }}">
                                 @error('sale_price')
                                 <em class="alert-danger">{{ $message }}</em>
                                 @enderror
@@ -79,7 +79,7 @@
                             <div class="form-group">
                                 <label for="size">Size</label>
                                 <input class="form-control @error('slug') is-invalid @enderror" id="size" type="text"
-                                       name="size" value="{{ old('size') }}">
+                                       name="size" value="{{ old('size', $item->size ?? null) }}">
                                 @error('size')
                                 <em class="alert-danger">{{ $message }}</em>
                                 @enderror
@@ -88,7 +88,7 @@
                             <div class="form-group">
                                 <label for="description">Description</label>
                                 <textarea class="form-control @error('description') is-invalid @enderror"
-                                          id="description" name="description">{{ old('description') }}</textarea>
+                                          id="description" name="description">{{ old('description', $item->description ?? null) }}</textarea>
                                 @error('description')
                                 <em class="alert-danger">{{ $message }}</em>
                                 @enderror
@@ -109,7 +109,7 @@
                                 <label for="quantity">Quantity</label>
                                 <input class="form-control @error('quantity') is-invalid @enderror" id="quantity"
                                        type="text"
-                                       name="quantity" value="{{ old('quantity', 0) }}">
+                                       name="quantity" value="{{ old('quantity', $item->quantity ?? 0) }}">
                                 @error('quantity')
                                 <em class="alert-danger">{{ $message }}</em>
                                 @enderror

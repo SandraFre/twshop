@@ -36,7 +36,9 @@
                                     <td>{{ $item->title }}</td>
                                     <td>{{ $item->slug }}</td>
                                     <td>{{ $item->price }}</td>
-                                    <td></td>
+                                    <td>
+                                        <a class="btn btn-sm btn-outline-primary" href="{{ route('products.edit', ['product' => $item->id]) }}">Edit</a>
+                                    </td>
                                 </tr>
                             @endforeach
 

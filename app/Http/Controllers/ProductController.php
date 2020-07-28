@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Http\Requests\ProductStoreRequest;
+use App\Http\Requests\ProductUpdateRequest;
 use App\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -48,6 +49,31 @@ class ProductController extends Controller
         $product->categories()->sync($request->getCatIds());
         return redirect()->route('products.index')
             ->with('status', 'Product created successfully!');
+    }
+
+    public function edit(Product $product): View
+    {
+        $categoriesIds = $product->categories->pluck('id')->toArray();
+
+        $categories = Category::query()
+            ->pluck('title', 'id');
+
+
+        return view('products.form', [
+            'item' => $product,
+            'categoryIds' => $categoriesIds,
+            'categories' => $categories,
+        ]);
+    }
+
+    public function update(ProductUpdateRequest $request, Product $product): RedirectResponse
+    {
+        $product->update($request->getData());
+
+        $product->categories()->sync($request->getCatIds());
+
+        return redirect()->route('products.index')
+            ->with('status', 'Product updated successfully!');
     }
 
 }

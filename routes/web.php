@@ -23,7 +23,7 @@ Auth::routes(['register' => false]);
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware('auth')->group(function(){
-    Route::resource('products', 'ProductController')->only(['index', 'create', 'store']);
+    Route::resource('products', 'ProductController')->except(['show', 'destroy']);
     Route::resource('categories', 'CategoryController')->except(['show']);
     Route::resource('orders', 'OrderController')->only(['index', 'edit', 'update', 'show']);
     Route::get('orders/{order}/item/{orderItem}/edit', 'OrderItemController@edit')->name('orders.item.edit');
